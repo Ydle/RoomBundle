@@ -1,0 +1,18 @@
+################
+#    Rooms     #
+################
+roomAdd:
+    pattern:  /rooms/add
+    defaults: { _controller: YdleRoomBundle:Default:form }
+roomEdit:
+    pattern:  /rooms/edit/{room}
+    defaults: { _controller: YdleRoomBundle:Default:form, room:0 }
+rooms:
+    pattern:  /rooms
+    defaults: { _controller: YdleRoomBundle:Default:index }
+roomDelete:
+    pattern:  /rooms/delete/{room}
+    defaults: { _controller: YdleRoomBundle:Default:roomdelete, room:0 } 
+roomActivation:
+    pattern:  /rooms/activation/{room}/{active}
+    defaults: { _controller: YdleRoomBundle:Default:roomactivation, room:0, active:0 } 

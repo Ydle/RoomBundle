@@ -1,0 +1,13 @@
+parameters:
+  ydle.roomtype.manager.class: Ydle\RoomBundle\Manager\RoomTypeManager
+  ydle.room.manager.class: Ydle\RoomBundle\Manager\RoomManager
+
+services:
+  ydle.roomtypes.manager:
+    class: %ydle.roomtype.manager.class%
+    arguments: 
+      entityManager: "@doctrine.orm.entity_manager"
+  ydle.rooms.manager:
+    class: %ydle.room.manager.class%
+    arguments: 
+      entityManager: "@doctrine.orm.entity_manager"

@@ -1,0 +1,55 @@
+{% extends "YdleIhmBundle::layout.html.twig" %}
+
+{% block title "Ydle - Rooms" %}
+
+{% block content %}
+
+    <div class="row">
+          <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
+            <h2>{{ "room.list.title" | trans({}, "YdleRoomBundle") }}</h2> 
+            <table id="rooms">
+            <thead>
+            <tr>
+              <th>{{ "room.list.name" | trans({}, "YdleRoomBundle") }}</th>
+              <th>{{ "room.list.type" | trans({}, "YdleRoomBundle") }}</th>
+              <th>{{ "room.list.active" | trans({}, "YdleRoomBundle") }}</th>
+              <th>{{ "title.action" | trans({}, "YdleIhmBundle") }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if items %}
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.type.name }}</td>
+                    <td>{% if item.isactive %}
+						{{ "label.yes" | trans({}, "YdleIhmBundle") }}
+						{% else %}
+						{{ "label.no" | trans({}, "YdleIhmBundle") }}
+						{% endif %}</td>
+                    <td>
+                        <a href="{{ path('roomEdit', {'room': item.id} ) }}"><img src="{{ asset('bundles/ydleihm/images/plugin_edit.png') }}" alt="{{ "action.edit" | trans({}, "YdleIhmBundle") }}" /></a>
+                                                {% if item.isactive %}
+                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 0} ) }}"><img src="{{ asset('bundles/ydleihm/images/plugin_error.png') }}" alt="{{ "action.deactivate" | trans({}, "YdleIhmBundle") }}" /></a>
+                        {% else %}
+                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 1} ) }}"><img src="{{ asset('bundles/ydleihm/images/plugin.png') }}" alt="{{ "action.activate" | trans({}, "YdleIhmBundle") }}" /></a>
+                        {% endif %}
+                        <a href="{{ path('roomDelete', {'room': item.id} ) }}" onclick="return confirm('{{ "room.delete.confirm" | trans({}, "YdleRoomBundle") }}');"><img src="{{ asset('bundles/ydleihm/images/plugin_delete.png') }}" alt="{{ "action.delete" | trans({}, "YdleIhmBundle") }}" /></a>                        
+                    </td>
+                </tr>
+            {% endfor %}
+            {% else %}
+                <tr>
+                  <td colspan="4">{{ "room.empty.list" | trans({}, "YdleRoomBundle") }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+            </table>
+          </div>   
+          <div class="col-lg-4 with-border" style="height: 282px;">
+              <div class="content">
+                <a href="{{ path('roomAdd') }}" class="btn" >{{ "room.btn.add" | trans({}, "YdleRoomBundle") }}</a>
+              </div>
+          </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+services:
+  ydle.rooms.form:
+    class: Ydle\RoomBundle\Form\Type\RoomType
+    tags:
+        - { name: form.type, alias: rooms_form } 
+  ydle.room_types.form:
+    class: Ydle\RoomBundle\Form\Type\RoomTypesType
+    tags:
+        - { name: form.type, alias: room_types }
