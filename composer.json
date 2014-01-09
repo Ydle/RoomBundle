@@ -1,5 +1,5 @@
 {
-    "name": "Ydle/RoomBundle",
+    "name": "ydle/room-bundle",
     "description": "Ydle Room Bundle",
     "type": "symfony-bundle",
     "keywords": ["ydle", "room", "domotique", "home automotion"],
