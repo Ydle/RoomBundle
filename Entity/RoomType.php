@@ -246,4 +246,18 @@ class RoomType
     {
         return $this->slug;
     }
+    
+    /**
+    * Custom toArray classe
+    * 
+    * @return array
+    */
+    public function toArray(){
+        return array(
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'is_active' => $this->getIsActive(),
+            'nb_rooms' => $this->getRooms()->count()
+        );
+    }
 }
