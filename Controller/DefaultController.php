@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use Ydle\RoomBundle\Entity\Room;
-use Ydle\RoomBundle\Entity\RoomType;
 
 class DefaultController extends Controller
 {

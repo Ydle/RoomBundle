@@ -4,7 +4,6 @@ namespace Ydle\RoomBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
 use Ydle\IhmBundle\Manager\BaseManager;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 class RoomTypeManager extends BaseManager
 {
