@@ -43,15 +43,20 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($room);
-			$em->flush();
-			$message = $this->get('translator')->trans('Pièce ajoutée avec succès');
-			if($room->getId()){
-				$message = 'Pièce modifié avec succès';
-			}
-			$this->get('session')->getFlashBag()->add('notice', $message);
-			return $this->redirect($this->generateUrl('rooms'));
+            $roomId = $room->getId();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($room);
+            $em->flush();
+            $message = $this->get('translator')->trans('Pièce ajoutée avec succès');
+            if($roomId){
+                $message = 'Pièce modifié avec succès';
+                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' modified');
+            } else {
+                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' created');
+            }
+            $this->get('session')->getFlashBag()->add('notice', $message);
+            
+            return $this->redirect($this->generateUrl('rooms'));
         }
         
         return $this->render('YdleRoomBundle:Default:form.html.twig', array(
@@ -68,11 +73,13 @@ class DefaultController extends Controller
      */
     public function roomdeleteAction(Request $request)
     {
-        $object = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
+        $roomId = $request->get('room');
+        $object = $this->get("ydle.rooms.manager")->getRepository()->find($roomId);
         $em = $this->getDoctrine()->getManager();                                                                         
         $em->remove($object);
         $em->flush();
         $this->get('session')->getFlashBag()->add('notice', 'Room removed');
+        $this->get('ydle.logger')->log('info', 'Room #'.$roomId.' deleted');
         return $this->redirect($this->generateUrl('rooms'));
     }
     
@@ -90,6 +97,12 @@ class DefaultController extends Controller
         $em->persist($object);
         $em->flush();
         $this->get('session')->getFlashBag()->add('notice', $message);
+        
+        if($isActive)  {
+            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' activated');
+        } else {
+            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' deactivated');
+        }
         return $this->redirect($this->generateUrl('rooms'));
     }
 }
