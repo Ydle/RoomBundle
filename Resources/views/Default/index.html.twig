@@ -20,7 +20,7 @@
             {% if items %}
             {% for item in items %}
                 <tr>
-                    <td>{{ item.name }}</td>
+                    <td><a href="{{ path('room', {'room': item.id }) }}">{{ item.name }}</a></td>
                     <td>{{ item.type.name }}</td>
                     <td>{% if item.isactive %}
 						{{ "label.yes" | trans({}, "YdleIhmBundle") }}

@@ -1,0 +1,32 @@
+{% extends "YdleRoomBundle:Default:index.html.twig" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
+          
+            <h2>{{ room.name }}</h2>
+            
+        </div>
+        <div class="col-lg-4 content panel panel-default">
+          <div class="panel-heading">
+          <h3 class="panel-title">Détails</h3>
+          </div>
+          <div class="panel-body">
+          Nom : {{ room.name }}<br />
+          Type : {{ room.type.name }}<br />
+          Active : {% if room.isactive %}
+          <a href="" class="label label-success">Yes</a>
+          {% else %}
+          <a href="" class="label label-primary">No</a>
+          {% endif %}<br />
+          {% if room.description %}
+          Description : {{ room.description }} <br />
+          {% endif %}
+          </div>
+          <div class="panel-footer">
+          <a href="{{ path('rooms') }}">Return</a>
+          </div>
+        </div>
+    </div>
+{% endblock %}

@@ -16,3 +16,9 @@ roomDelete:
 roomActivation:
     pattern:  /rooms/activation/{room}/{active}
     defaults: { _controller: YdleRoomBundle:Default:roomactivation, room:0, active:0 } 
+room:
+    pattern:  /room/{room}
+    defaults: { _controller: YdleRoomBundle:Default:detail, room: 0 }
+room_activation:
+    pattern:  /room/{room}/{active}
+    defaults: { _controller: YdleRoomBundle:Default:detail, room: 0, active: 0 }
