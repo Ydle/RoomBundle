@@ -28,13 +28,13 @@
 						{{ "label.no" | trans({}, "YdleIhmBundle") }}
 						{% endif %}</td>
                     <td>
-                        <a href="{{ path('roomEdit', {'room': item.id} ) }}"><img src="{{ asset('bundles/ydleihm/images/plugin_edit.png') }}" alt="{{ "action.edit" | trans({}, "YdleIhmBundle") }}" /></a>
+                        <a href="{{ path('roomEdit', {'room': item.id} ) }}" class="glyphicon glyphicon-pencil"></a>
                                                 {% if item.isactive %}
-                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 0} ) }}"><img src="{{ asset('bundles/ydleihm/images/plugin_error.png') }}" alt="{{ "action.deactivate" | trans({}, "YdleIhmBundle") }}" /></a>
+                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 0} ) }}" class="glyphicon glyphicon-pause"></a>
                         {% else %}
-                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 1} ) }}"><img src="{{ asset('bundles/ydleihm/images/plugin.png') }}" alt="{{ "action.activate" | trans({}, "YdleIhmBundle") }}" /></a>
+                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 1} ) }}" class="glyphicon glyphicon-play"></a>
                         {% endif %}
-                        <a href="{{ path('roomDelete', {'room': item.id} ) }}" onclick="return confirm('{{ "room.delete.confirm" | trans({}, "YdleRoomBundle") }}');"><img src="{{ asset('bundles/ydleihm/images/plugin_delete.png') }}" alt="{{ "action.delete" | trans({}, "YdleIhmBundle") }}" /></a>                        
+                        <a href="{{ path('roomDelete', {'room': item.id} ) }}" onclick="return confirm('{{ "room.delete.confirm" | trans({}, "YdleRoomBundle") }}');" class="glyphicon glyphicon-remove"></a>                        
                     </td>
                 </tr>
             {% endfor %}
@@ -48,7 +48,7 @@
           </div>   
           <div class="col-lg-4 with-border" style="height: 282px;">
               <div class="content">
-                <a href="{{ path('roomAdd') }}" class="btn" >{{ "room.btn.add" | trans({}, "YdleRoomBundle") }}</a>
+                <a href="{{ path('roomAdd') }}" class="btn glyphicon glyphicon-plus-sign" >{{ "room.btn.add" | trans({}, "YdleRoomBundle") }}</a>
               </div>
           </div>
         </div>
