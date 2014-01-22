@@ -105,4 +105,13 @@ class DefaultController extends Controller
         }
         return $this->redirect($this->generateUrl('rooms'));
     }
+    
+    public function detailAction(Request $request)
+    {
+        $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
+        
+        return $this->render('YdleRoomBundle:Default:detail.html.twig', array(
+            'room' => $room
+        ));
+    }
 }
