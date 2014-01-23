@@ -50,9 +50,9 @@ class DefaultController extends Controller
             $message = $this->get('translator')->trans('Pièce ajoutée avec succès');
             if($roomId){
                 $message = 'Pièce modifié avec succès';
-                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' modified');
+                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' modified', 'hub');
             } else {
-                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' created');
+                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' created', 'hub');
             }
             $this->get('session')->getFlashBag()->add('notice', $message);
             
@@ -78,7 +78,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();                                                                         
         $em->remove($object);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('notice', 'Room removed');
+        $this->get('session')->getFlashBag()->add('notice', 'Room removed', 'hub');
         $this->get('ydle.logger')->log('info', 'Room #'.$roomId.' deleted');
         return $this->redirect($this->generateUrl('rooms'));
     }
@@ -99,9 +99,9 @@ class DefaultController extends Controller
         $this->get('session')->getFlashBag()->add('notice', $message);
         
         if($isActive)  {
-            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' activated');
+            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' activated', 'hub');
         } else {
-            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' deactivated');
+            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' deactivated', 'hub');
         }
         return $this->redirect($this->generateUrl('rooms'));
     }
