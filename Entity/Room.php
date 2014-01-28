@@ -76,6 +76,12 @@ class Room
     private $slug;
     
     /**
+     * 
+     * @ORM\OneToMany(targetEntity="\Ydle\NodesBundle\Entity\Node", mappedBy="room")
+     */
+    private $nodes;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -226,5 +232,38 @@ class Room
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    /**
+     * Add rooms
+     *
+     * @param \Ydle\NodesBundle\Entity\Node $node
+     * @return Room
+     */
+    public function addNode(\Ydle\NodesBundle\Entity\Node $node)
+    {
+        $this->nodes[] = $node;
+    
+        return $this;
+    }
+
+    /**
+     * Remove rooms
+     *
+     * @param \Ydle\NodesBundle\Entity\Node $node $node
+     */
+    public function removeRoom(\Ydle\NodesBundle\Entity\Node $node)
+    {
+        $this->nodes->removeElement($node);
+    }
+
+    /**
+     * Get rooms
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNodes()
+    {
+        return $this->nodes;
     }
 }

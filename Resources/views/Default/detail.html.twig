@@ -23,6 +23,14 @@
           {% if room.description %}
           Description : {{ room.description }} <br />
           {% endif %}
+          Capteurs : 
+          {% if room.nodes|length %}
+            {% for node in room.nodes %}
+              {{ node.name }}<br />
+            {% endfor %}
+          {% else %}
+          Aucun capteur
+          {% endif %}
           </div>
           <div class="panel-footer">
           <a href="{{ path('rooms') }}">Return</a>
