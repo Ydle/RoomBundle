@@ -1,6 +1,9 @@
 ################
 #    Rooms     #
 ################
+roomData:
+    pattern:  /rooms/data/{room}/{node}/{type}
+    defaults: { _controller: YdleRoomBundle:Default:data, room:0, node:0, type:0 }
 roomAdd:
     pattern:  /rooms/add
     defaults: { _controller: YdleRoomBundle:Default:form }

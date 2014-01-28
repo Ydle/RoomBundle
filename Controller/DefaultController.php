@@ -4,6 +4,7 @@ namespace Ydle\RoomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Ydle\RoomBundle\Entity\Room;
 
@@ -113,5 +114,34 @@ class DefaultController extends Controller
         return $this->render('YdleRoomBundle:Default:detail.html.twig', array(
             'room' => $room
         ));
+    }
+    
+    public function dataAction(Request $request)
+    {
+        $msg = 'ok';
+        $result = array();
+        $roomId = $request->get('room');
+        $nodeId = $request->get('node');
+        $typeId = $request->get('type');
+        $startDate = date("2014-01-27 00:00:00");
+        $label = '';
+        if(!$type = $this->get('ydle.sensortypes.manager')->getRepository()->find($typeId)){
+            $msg = 'ko';
+        } else {
+
+            $params = array(
+                'room_id' => $roomId,
+                'node_id' => $nodeId,
+                'type_id' => $typeId,
+                'start_date' => $startDate
+            );
+            $data = $this->get("ydle.data.manager")->findByRoom($params);
+
+            foreach($data as $res){
+                $result[] = array($res->getCreated()->format('U') * 1000, $res->getData());
+            }
+            $label = $type->getName();
+        }
+        return new JsonResponse(array('msgReturn' => $msg, 'label' => $label, 'data' => $result, 'roomId' => $roomId, 'nodeId' => $nodeId));
     }
 }

@@ -1,11 +1,17 @@
 {% extends "YdleRoomBundle:Default:index.html.twig" %}
 
 {% block content %}
-
     <div class="row">
         <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
           
             <h2>{{ room.name }}</h2>
+            {% if room.nodes|length %}
+            {% for node in room.nodes %}
+            <div class="graph-container">
+                <div id="graphplaceholder-{{ node.id }}" class="graph graphplaceholder" data-nid="{{ node.id }}"></div>
+            </div>
+            {% endfor %}
+            {% endif %}
             
         </div>
         <div class="col-lg-4 content panel panel-default">
