@@ -111,8 +111,11 @@ class DefaultController extends Controller
     {
         $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
         
+        $lastData = $this->get('ydle.data.manager')->getLastData($room->getId());
+        
         return $this->render('YdleRoomBundle:Default:detail.html.twig', array(
-            'room' => $room
+            'room' => $room,
+            'data' => $lastData
         ));
     }
     

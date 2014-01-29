@@ -42,5 +42,22 @@
           <a href="{{ path('rooms') }}">Return</a>
           </div>
         </div>
+        {% if data | length %}
+        <div class="col-lg-4 content panel panel-default">
+          <div class="panel-heading">
+          <h3 class="panel-title">Données</h3>
+          </div>
+          <div class="panel-body">
+          {% for sensorData in data %}
+            {% set type = sensorData.type.unit %}
+            {% if type == '°' %}
+              {{ sensorData.type.name }} : {{ sensorData.data / 100 }} °C
+            {% elseif type == '%' %}
+              {{ sensorData.type.name }} : {{ sensorData.data / 100 | number_format }} %
+            {% endif %}
+          {% endfor %}
+          </div>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
