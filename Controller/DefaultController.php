@@ -79,8 +79,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();                                                                         
         $em->remove($object);
         $em->flush();
-        $this->get('session')->getFlashBag()->add('notice', 'Room removed', 'hub');
-        $this->get('ydle.logger')->log('info', 'Room #'.$roomId.' deleted');
+        $this->get('session')->getFlashBag()->add('notice', 'Room removed');
+        $this->get('ydle.logger')->log('info', 'Room #'.$roomId.' deleted', 'hub');
         return $this->redirect($this->generateUrl('rooms'));
     }
     
