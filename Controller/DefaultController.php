@@ -141,7 +141,16 @@ class DefaultController extends Controller
             $data = $this->get("ydle.data.manager")->findByRoom($params);
 
             foreach($data as $res){
-                $result[] = array($res->getCreated()->format('U') * 1000, $res->getData());
+                $data = $res->getData();
+                switch($type->getUnit()){
+                    case '°':
+                        $data = $data / 100;
+                        break;
+                    case '%':
+                        $data = $data / 100;
+                        break;
+                }
+                $result[] = array($res->getCreated()->format('U') * 1000, $data);
             }
             $label = $type->getName();
         }
