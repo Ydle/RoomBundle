@@ -14,6 +14,11 @@ class RoomManager extends BaseManager
     {
         $this->em = $em;
     }
+    
+    public function retrieve($params = array())
+    {
+        return $this->getRepository()->retrieve($params);
+    }
 
     public function findAllByName()
     {
