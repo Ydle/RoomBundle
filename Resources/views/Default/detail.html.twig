@@ -16,18 +16,18 @@
         </div>
         <div class="col-lg-4 content panel panel-default">
           <div class="panel-heading">
-          <h3 class="panel-title">Détails</h3>
+          <h3 class="panel-title">{{ "label.details" | trans({}, "YdleIhmBundle") }}</h3>
           </div>
           <div class="panel-body">
-          Nom : {{ room.name }}<br />
-          Type : {{ room.type.name }}<br />
-          Active : {% if room.isactive %}
-          <a href="" class="label label-success">Yes</a>
+          {{ "label.name" | trans({}, "YdleIhmBundle") }} : {{ room.name }}<br />
+          {{ "label.type" | trans({}, "YdleIhmBundle") }} : {{ room.type.name }}<br />
+          {{ "label.active" | trans({}, "YdleIhmBundle") }} : {% if room.isactive %}
+          <a href="" class="label label-success">{{ "label.yes" | trans({}, "YdleIhmBundle") }}</a>
           {% else %}
-          <a href="" class="label label-primary">No</a>
+          <a href="" class="label label-primary">{{ "label.no" | trans({}, "YdleIhmBundle") }}</a>
           {% endif %}<br />
           {% if room.description %}
-          Description : {{ room.description }} <br />
+          {{ "label.description" | trans({}, "YdleIhmBundle") }} : {{ room.description }} <br />
           {% endif %}
           Capteurs : 
           {% if room.nodes|length %}
@@ -39,13 +39,13 @@
           {% endif %}
           </div>
           <div class="panel-footer">
-          <a href="{{ path('rooms') }}" class="btn btn-default">Return</a>
+          <a href="{{ path('rooms') }}" class="btn btn-default">{{ "action.return" | trans({}, "YdleIhmBundle") }}</a>
           </div>
         </div>
         {% if data | length %}
         <div class="col-lg-4 content panel panel-default">
           <div class="panel-heading">
-          <h3 class="panel-title">Données</h3>
+          <h3 class="panel-title">{{ "room.data" | trans({}, "YdleRoomBundle") }}</h3>
           </div>
           <div class="panel-body">
           {% for sensorData in data %}
