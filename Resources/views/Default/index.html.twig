@@ -1,6 +1,6 @@
 {% extends "YdleIhmBundle::layout.html.twig" %}
 
-{% block title "Ydle - Rooms" %}
+{% block title '{{ "page.rooms.title" | trans({}, "YdleRoomBundle") }}' %}
 
 {% block content %}
 
@@ -10,9 +10,9 @@
             <table id="rooms">
             <thead>
             <tr>
-              <th>{{ "room.list.name" | trans({}, "YdleRoomBundle") }}</th>
-              <th>{{ "room.list.type" | trans({}, "YdleRoomBundle") }}</th>
-              <th>{{ "room.list.active" | trans({}, "YdleRoomBundle") }}</th>
+              <th>{{ "title.name" | trans({}, "YdleIhmBundle") }}</th>
+              <th>{{ "title.type" | trans({}, "YdleIhmBundle") }}</th>
+              <th>{{ "title.active" | trans({}, "YdleIhmBundle") }}</th>
               <th>{{ "title.action" | trans({}, "YdleIhmBundle") }}</th>
             </tr>
             </thead>
