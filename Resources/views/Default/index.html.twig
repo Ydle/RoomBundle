@@ -36,6 +36,8 @@
                         {% endif %}
                         {% if item.nodes.count == 0 %}
                         <a href="{{ path('roomDelete', {'room': item.id} ) }}" onclick="return confirm('{{ "room.delete.confirm" | trans }}');" class="glyphicon glyphicon-remove"></a>
+                        {% else %}
+                        <span class="glyphicon glyphicon-remove"></span>
                         {% endif %}
                     </td>
                 </tr>
