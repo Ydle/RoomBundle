@@ -15,7 +15,6 @@ class DefaultController extends Controller
      * Homepage for rooms managment
      * 
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return type
      */
     public function indexAction(Request $request)
     {
@@ -70,7 +69,6 @@ class DefaultController extends Controller
      * Delete a room
      * 
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return type
      */
     public function roomdeleteAction(Request $request)
     {

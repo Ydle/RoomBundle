@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
           
-            <h2>{{ "room.add.title" | trans({}, "YdleRoomBundle") }}</h2>
+            <h2>{{ "room.add.title" | trans }}</h2>
             {{ form_start(form, { 'attr': {'class': 'ydle-form'} }) }}
             {{ form_errors(form) }}
 
@@ -30,7 +30,7 @@
                 {{ form_widget(form.is_active) }}
             </div>
             <div class="form-item form-actions">
-                <button type="submit" class="btn btn-default glyphicon glyphicon-floppy-disk">{{ "btn.submit" | trans({}, "YdleIhmBundle") }}</button>
+                <button type="submit" class="btn btn-default glyphicon glyphicon-floppy-disk">{{ "btn.submit" | trans }}</button>
             </div>
             {{ form_end(form) }}  
         </div>
