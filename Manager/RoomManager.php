@@ -18,7 +18,7 @@
 namespace Ydle\RoomBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
-use Ydle\IhmBundle\Manager\BaseManager;
+use Ydle\HubBundle\Manager\BaseManager;
 
 class RoomManager extends BaseManager
 {
