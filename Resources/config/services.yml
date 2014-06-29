@@ -13,6 +13,7 @@
 #    You should have received a copy of the GNU Lesser General Public License
 #    along with Ydle.  If not, see <http://www.gnu.org/licenses/>.
 parameters:
+  ydle.roomtype.entity.class: Ydle\RoomBundle\Model\RoomType
   ydle.roomtype.manager.class: Ydle\RoomBundle\Manager\RoomTypeManager
   ydle.room.manager.class: Ydle\RoomBundle\Manager\RoomManager
 

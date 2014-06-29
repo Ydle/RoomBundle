@@ -20,64 +20,57 @@
 {% block title '{{ "page.rooms.title" | trans }}' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-xs-12">
-        <!-- small box -->
-        <div class="box">
-            <div class="box-header" style="cursor: move;">
-                    <h3 class="box-title">All rooms</h3>
-                    <div class="box-tools pull-right">
-                    <button data-original-title="Collapse" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title=""><i class="fa fa-minus"></i></button>
-                    </div>
-            </div>
-            <div class="box-body table-responsive">
-                <div role="grid" class="dataTables_wrapper">
-                    <table class="table table-bordered table-hover dataTable">
-                    <thead>
-                    <tr>
-                            <th>Nom de la pièce</th>
-                            <th>Type de pièce</th>
-                            <th>Actif ? </th>
-                            <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                            <th>Nom de la pièce</th>
-                            <th>Type de pièce</th>
-                            <th>Actif ? </th>
-                            <th>Action</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    {% if items %}
-                    {% for item in items %}
-                    <tr class="{{ cycle(['odd','even'], loop.index0) }}">
-                            <td><a href="{{ path('room', {'room': item.id }) }}">{{ item.name }}</a></td>
-                            <td>{{ item.type.name }}</td>
-                            <td>
-                                {% if item.isactive %}
-                                Yes
-                                {% else %}
-                                No
-                                {% endif %}
-                            </td>
-                            <td></td>
-                    </tr>
-                    {% endfor %}
-                    {% else %}
-                    <tr>
-                        <td colspan="4">No rooms yets</td>
-                    </tr>
-                    {% endif %}
-                    </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-xs-6"><div id="example2_info" class="dataTables_info">Showing 1 to 10 of 57 entries</div></div>
-                    </div>
-                </div>
-            </div>
+
+    <div class="row">
+          <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
+            <h2>{{ "room.list.title" | trans }}</h2> 
+            <table id="rooms">
+            <thead>
+            <tr>
+              <th>{{ "title.name" | trans }}</th>
+              <th>{{ "title.type" | trans }}</th>
+              <th>{{ "title.active" | trans }}</th>
+              <th>{{ "title.action" | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if items %}
+            {% for item in items %}
+                <tr>
+                    <td><a href="{{ path('room', {'room': item.id }) }}">{{ item.name }}</a></td>
+                    <td>{{ item.type.name }}</td>
+                    <td>{% if item.isactive %}
+						{{ "label.yes" | trans }}
+						{% else %}
+						{{ "label.no" | trans }}
+						{% endif %}</td>
+                    <td>
+                        <a href="{{ path('roomEdit', {'room': item.id} ) }}" class="glyphicon glyphicon-pencil"></a>
+                                                {% if item.isactive %}
+                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 0} ) }}" class="glyphicon glyphicon-pause"></a>
+                        {% else %}
+                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 1} ) }}" class="glyphicon glyphicon-play"></a>
+                        {% endif %}
+                        {% if item.nodes.count == 0 %}
+                        <a href="{{ path('roomDelete', {'room': item.id} ) }}" onclick="return confirm('{{ "room.delete.confirm" | trans }}');" class="glyphicon glyphicon-remove"></a>
+                        {% else %}
+                        <span class="glyphicon glyphicon-remove"></span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            {% else %}
+                <tr>
+                  <td colspan="4">{{ "room.empty.list" | trans }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+            </table>
+          </div>   
+          <div class="col-lg-4 with-border" style="height: 282px;">
+              <div class="content">
+                <a href="{{ path('roomAdd') }}" class="btn btn-default glyphicon glyphicon-plus-sign" >{{ "room.btn.add" | trans }}</a>
+              </div>
+          </div>
         </div>
-    </div><!-- ./col -->
-</div>
 {% endblock %}

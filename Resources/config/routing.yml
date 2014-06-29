@@ -16,27 +16,27 @@
 ################
 #    Rooms     #
 ################
-roomData:
-    pattern:  /rooms/data/{room}/{node}/{type}
-    defaults: { _controller: YdleRoomBundle:Default:data, room:0, node:0, type:0 }
-roomAdd:
-    pattern:  /rooms/add
-    defaults: { _controller: YdleRoomBundle:Default:form }
-roomEdit:
-    pattern:  /rooms/edit/{room}
-    defaults: { _controller: YdleRoomBundle:Default:form, room:0 }
+#roomData:
+#    pattern:  /rooms/data/{room}/{node}/{type}
+#    defaults: { _controller: YdleRoomBundle:Default:data, room:0, node:0, type:0 }
+#roomAdd:
+#    pattern:  /rooms/add
+#    defaults: { _controller: YdleRoomBundle:Default:form }
+#roomEdit:
+#    pattern:  /rooms/edit/{room}
+#    defaults: { _controller: YdleRoomBundle:Default:form, room:0 }
 rooms:
     pattern:  /rooms
     defaults: { _controller: YdleRoomBundle:Default:index }
-roomDelete:
-    pattern:  /rooms/delete/{room}
-    defaults: { _controller: YdleRoomBundle:Default:roomdelete, room:0 } 
-roomActivation:
-    pattern:  /rooms/activation/{room}/{active}
-    defaults: { _controller: YdleRoomBundle:Default:roomactivation, room:0, active:0 } 
-room:
-    pattern:  /room/{room}
-    defaults: { _controller: YdleRoomBundle:Default:detail, room: 0 }
-room_activation:
-    pattern:  /room/{room}/{active}
-    defaults: { _controller: YdleRoomBundle:Default:detail, room: 0, active: 0 }
+#roomDelete:
+#    pattern:  /rooms/delete/{room}
+#    defaults: { _controller: YdleRoomBundle:Default:roomdelete, room:0 } 
+#roomActivation:
+#    pattern:  /rooms/activation/{room}/{active}
+#    defaults: { _controller: YdleRoomBundle:Default:roomactivation, room:0, active:0 } 
+#room:
+#    pattern:  /room/{room}
+#    defaults: { _controller: YdleRoomBundle:Default:detail, room: 0 }
+#room_activation:
+#    pattern:  /room/{room}/{active}
+#    defaults: { _controller: YdleRoomBundle:Default:detail, room: 0, active: 0 }

@@ -17,27 +17,52 @@
  */
 namespace Ydle\RoomBundle\Manager;
 
-use Doctrine\ORM\EntityManager;
-use Ydle\HubBundle\Manager\BaseManager;
+use Ydle\RoomBundle\Model\RoomTypeManagerInterface;
+use Ydle\CoreBundle\Model\BaseEntityManager;
 
-class RoomTypeManager extends BaseManager
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+
+class RoomTypeManager extends BaseEntityManager implements RoomTypeManagerInterface
 {
-
-    protected $em;
-
-    public function __construct(EntityManager $em)
+    /**
+    * {@inheritdoc}
+    */
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
     {
-        $this->em = $em;
-    }
+        $parameters = array();
 
-    public function findAllByName()
+        $query = $this->getRepository()
+            ->createQueryBuilder('rt')
+            ->select('rt');
+
+        $query->setParameters($parameters);
+
+        $pager = new Pager();
+        $pager->setQuery(new ProxyQuery($query));
+        $pager->setMaxPerPage($limit);
+        $pager->setPage($page);
+        $pager->init();
+
+//        echo '<pre>';
+//        \Doctrine\Common\Util\Debug::dump($pager);die();
+        return $pager;
+    }
+    
+    /**
+     * Change the state of a room type
+     * 
+     * @param integer $id
+     * @param boolean $newState
+     * @return boolean
+     */
+    public function changeState($id, $newState = 0)
     {
-        return $this->getRepository()->findAllOrderedByName();
+        if(!$object = $this->find($id)){
+            return false;
+        }
+        $object->setIsActive($newState);
+        $this->save($object);
+        return true;
     }
-
-    public function getRepository()
-    {
-        return $this->em->getRepository('YdleRoomBundle:RoomType');
-    }
-
 }
