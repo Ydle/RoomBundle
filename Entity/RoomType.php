@@ -19,6 +19,7 @@ namespace Ydle\RoomBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -42,6 +43,7 @@ class RoomType
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Gedmo\Translatable
      * @Assert\NotBlank()
      */
     private $name;
@@ -50,6 +52,7 @@ class RoomType
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @Gedmo\Translatable
      */
     private $description;
 
@@ -89,6 +92,14 @@ class RoomType
      */
     private $slug;
 
+    
+
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
     /**
      * Get id
@@ -278,5 +289,10 @@ class RoomType
             'is_active' => $this->getIsActive(),
             'nb_rooms' => $this->getRooms()->count()
         );
+    }
+    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

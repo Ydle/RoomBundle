@@ -29,24 +29,66 @@ class LoadRoomData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $typeBedroom = new RoomType();
-        $typeBedroom->setName('Chambre');
-        $typeBedroom->setDescription('Les chambres à coucher');
-        $typeBedroom->setIsActive(true);
-        
         $typeLivingRoom = new RoomType();
-        $typeLivingRoom->setName('Salon');
-        $typeLivingRoom->setDescription('Salon ou pièce à vivre');
+        $typeLivingRoom->setName('Living room');
         $typeLivingRoom->setIsActive(true);
-        
+
+        $typeKitchen = new RoomType();
+        $typeKitchen->setName('Kitchen');
+        $typeKitchen->setIsActive(true);
+
+        $typeBedroom = new RoomType();
+        $typeBedroom->setName('Bedroom');
+        $typeBedroom->setIsActive(true);
+		
+        $typeAttic = new RoomType();
+        $typeAttic->setName('Attic');
+        $typeAttic->setIsActive(true);
+		
+        $typeGarage = new RoomType();
+        $typeGarage->setName('Garage');
+        $typeGarage->setIsActive(true);
+		
+        $typeBathroom = new RoomType();
+        $typeBathroom->setName('Bathroom');
+        $typeBathroom->setIsActive(true);
+		
+        $typeToilet = new RoomType();
+        $typeToilet->setName('Toilet');
+        $typeToilet->setIsActive(true);
+
+	$typeOffice = new RoomType();
+        $typeOffice->setName('Office');
+        $typeOffice->setIsActive(true);
+		
+        $typeCellar = new RoomType();
+        $typeCellar->setName('Cellar');
+        $typeCellar->setIsActive(true);
+		
+        $typeDressing = new RoomType();
+        $typeDressing->setName('Dressing');
+        $typeDressing->setIsActive(true);
+
         $bedroom = new Room();
-        $bedroom->setName('Ma chambre');
-        $bedroom->setDescription('Chambre de test');
+        $bedroom->setName('My bedroom');
+        $bedroom->setDescription('Test bedroom');
         $bedroom->setType($typeBedroom);
         $bedroom->setIsActive(true);
 
-        $manager->persist($typeBedroom);
+        $repository = $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
+	$repository->translate($typeLivingRoom, 'name', 'fr', 'Salon');
+
         $manager->persist($typeLivingRoom);
+        $manager->persist($typeKitchen);
+        $manager->persist($typeBedroom);
+        $manager->persist($typeAttic);
+        $manager->persist($typeGarage);
+        $manager->persist($typeBathroom);
+        $manager->persist($typeToilet);
+        $manager->persist($typeOffice);
+        $manager->persist($typeCellar);
+        $manager->persist($typeDressing);
+
         $manager->persist($bedroom);
         $manager->flush();
     }
