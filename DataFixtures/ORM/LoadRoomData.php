@@ -75,9 +75,6 @@ class LoadRoomData implements FixtureInterface
         $bedroom->setType($typeBedroom);
         $bedroom->setIsActive(true);
 
-        $repository = $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation');
-	$repository->translate($typeLivingRoom, 'name', 'fr', 'Salon');
-
         $manager->persist($typeLivingRoom);
         $manager->persist($typeKitchen);
         $manager->persist($typeBedroom);
