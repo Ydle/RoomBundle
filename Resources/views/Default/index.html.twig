@@ -17,60 +17,9 @@
 
 {% extends "YdleHubBundle::layout.html.twig" %}
 
-{% block title '{{ "page.rooms.title" | trans }}' %}
+{% block title %}{{ "title.rooms" | trans}}{% endblock %}
 
 {% block content %}
-
-    <div class="row">
-          <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
-            <h2>{{ "room.list.title" | trans }}</h2> 
-            <table id="rooms">
-            <thead>
-            <tr>
-              <th>{{ "title.name" | trans }}</th>
-              <th>{{ "title.type" | trans }}</th>
-              <th>{{ "title.active" | trans }}</th>
-              <th>{{ "title.action" | trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% if items %}
-            {% for item in items %}
-                <tr>
-                    <td><a href="{{ path('room', {'room': item.id }) }}">{{ item.name }}</a></td>
-                    <td>{{ item.type.name }}</td>
-                    <td>{% if item.isactive %}
-						{{ "label.yes" | trans }}
-						{% else %}
-						{{ "label.no" | trans }}
-						{% endif %}</td>
-                    <td>
-                        <a href="{{ path('roomEdit', {'room': item.id} ) }}" class="glyphicon glyphicon-pencil"></a>
-                                                {% if item.isactive %}
-                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 0} ) }}" class="glyphicon glyphicon-pause"></a>
-                        {% else %}
-                        <a href="{{ path('roomActivation', {'room': item.id, 'active': 1} ) }}" class="glyphicon glyphicon-play"></a>
-                        {% endif %}
-                        {% if item.nodes.count == 0 %}
-                        <a href="{{ path('roomDelete', {'room': item.id} ) }}" onclick="return confirm('{{ "room.delete.confirm" | trans }}');" class="glyphicon glyphicon-remove"></a>
-                        {% else %}
-                        <span class="glyphicon glyphicon-remove"></span>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            {% else %}
-                <tr>
-                  <td colspan="4">{{ "room.empty.list" | trans }}</td>
-                </tr>
-            {% endif %}
-            </tbody>
-            </table>
-          </div>   
-          <div class="col-lg-4 with-border" style="height: 282px;">
-              <div class="content">
-                <a href="{{ path('roomAdd') }}" class="btn btn-default glyphicon glyphicon-plus-sign" >{{ "room.btn.add" | trans }}</a>
-              </div>
-          </div>
-        </div>
+<div class="row">
+</div>
 {% endblock %}

@@ -17,32 +17,36 @@
  */
 namespace Ydle\RoomBundle\Manager;
 
-use Doctrine\ORM\EntityManager;
-use Ydle\HubBundle\Manager\BaseManager;
+use Ydle\RoomBundle\Model\RoomManagerInterface;
+use Ydle\CoreBundle\Model\BaseEntityManager;
 
-class RoomManager extends BaseManager
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+
+class RoomManager extends BaseEntityManager implements RoomManagerInterface
 {
 
-    protected $em;
-
-    public function __construct(EntityManager $em)
+    /**
+    * {@inheritdoc}
+    */
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
     {
-        $this->em = $em;
-    }
-    
-    public function retrieve($params = array())
-    {
-        return $this->getRepository()->retrieve($params);
-    }
+        $parameters = array();
 
-    public function findAllByName()
-    {
-        return $this->getRepository()->findAll();
-    }
+        $query = $this->getRepository()
+            ->createQueryBuilder('r')
+            ->select('r');
 
-    public function getRepository()
-    {
-        return $this->em->getRepository('YdleRoomBundle:Room');
-    }
+        $query->setParameters($parameters);
 
+        $pager = new Pager();
+        $pager->setQuery(new ProxyQuery($query));
+        //$pager->setMaxPerPage($limit);
+        $pager->setPage($page);
+        $pager->init();
+
+//        echo '<pre>';
+//        \Doctrine\Common\Util\Debug::dump($pager);die();
+        return $pager;
+    }
 }

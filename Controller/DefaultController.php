@@ -33,10 +33,8 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $rooms = $this->get("ydle.rooms.manager")->findAllByName();
         
         return $this->render('YdleRoomBundle:Default:index.html.twig', array(
-        	'items' => $rooms
         ));
     }
     
