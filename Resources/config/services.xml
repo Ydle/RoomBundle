@@ -6,11 +6,17 @@
     <parameters>
         <parameter key="ydle.roomtype.manager.class">Ydle\RoomBundle\Manager\RoomTypeManager</parameter>
         <parameter key="ydle.roomtype.entity.class">Ydle\RoomBundle\Entity\RoomType</parameter>
+        <parameter key="ydle.room.manager.class">Ydle\RoomBundle\Manager\RoomManager</parameter>
+        <parameter key="ydle.room.entity.class">Ydle\RoomBundle\Entity\Room</parameter>
     </parameters>
     
     <services>
         <service id="ydle.roomtype.manager" class="%ydle.roomtype.manager.class%">
             <argument>%ydle.roomtype.entity.class%</argument>
+            <argument type="service" id="doctrine" />
+        </service>
+        <service id="ydle.room.manager" class="%ydle.room.manager.class%">
+            <argument>%ydle.room.entity.class%</argument>
             <argument type="service" id="doctrine" />
         </service>
     </services>

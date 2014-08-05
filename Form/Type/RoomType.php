@@ -44,7 +44,7 @@ class RoomType extends AbstractType
 
     public function getName()
     {
-        return 'rooms_form';
+        return 'room_form';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

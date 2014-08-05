@@ -15,41 +15,12 @@
 
 #}
 
-{% extends "YdleRoomBundle:Default:index.html.twig" %}
+{% if entry %}
+{% set dataformsource = '/nodes/form/' ~ entry.id %}
+{% else %}
+{% set dataformsource = '' %}
+{% endif %}
 
-{% block content %}
-
-    <div class="row">
-        <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
-          
-            <h2>{{ "room.add.title" | trans }}</h2>
-            {{ form_start(form, { 'attr': {'class': 'ydle-form'} }) }}
-            {{ form_errors(form) }}
-
-            <div class="form-item">
-                {{ form_label(form.name) }}
-                {{ form_errors(form.name) }}
-                {{ form_widget(form.name) }}
-            </div>
-            <div class="form-item">
-                {{ form_label(form.type) }}
-                {{ form_errors(form.type) }}
-                {{ form_widget(form.type) }}
-            </div>
-            <div class="form-item">
-                {{ form_label(form.description) }}
-                {{ form_errors(form.description) }}
-                {{ form_widget(form.description) }}
-            </div>
-            <div class="form-item">
-                {{ form_label(form.is_active) }}
-                {{ form_errors(form.is_active) }}
-                {{ form_widget(form.is_active) }}
-            </div>
-            <div class="form-item form-actions">
-                <button type="submit" class="btn btn-default glyphicon glyphicon-floppy-disk">{{ "btn.submit" | trans }}</button>
-            </div>
-            {{ form_end(form) }}  
-        </div>
-    </div>
-{% endblock %}
+{{ form_start(form, { 'action': action, 'attr': {'class': 'ydle-form ajax-form', 'role': 'form', 'data-reload': 'nodes-list', 'data-formsource': dataformsource, 'data-refresh': true, 'novalidate': 'novalidate', 'id': 'node-form' } }) }}
+{{ form_errors(form) }}
+{{ form_end(form) }}

@@ -16,3 +16,10 @@
 rooms:
     pattern:  /rooms
     defaults: { _controller: YdleRoomBundle:Default:index }
+roomForm:
+  pattern: /room/form/{room}
+  defaults: { _controller: YdleRoomBundle:Default:roomForm, room:0 }
+submitRoomForm:
+  pattern: /room/form/{room}/submit
+  defaults: { _controller: YdleRoomBundle:Default:submitRoomForm, room:0 }
+

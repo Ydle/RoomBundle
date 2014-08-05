@@ -5,11 +5,15 @@
 
     <parameters>
         <parameter key="ydle.room_types.form.class">Ydle\RoomBundle\Form\Type\RoomTypesType</parameter>
+        <parameter key="ydle.room.form.class">Ydle\RoomBundle\Form\Type\RoomType</parameter>
     </parameters>
     
     <services>
         <service id="ydle.room_types.form" class="%ydle.room_types.form.class%">
             <tag name="form.type" alias="room_types" />
+        </service>
+        <service id="ydle.room.form" class="%ydle.room.form.class%">
+            <tag name="form.type" alias="room_form" />
         </service>
     </services>
 </container>

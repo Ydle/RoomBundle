@@ -23,6 +23,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Ydle\RoomBundle\Entity\Room;
 
+use Symfony\Component\HttpFoundation\Response;
+
+
 class DefaultController extends Controller
 {
 
@@ -37,46 +40,75 @@ class DefaultController extends Controller
         return $this->render('YdleRoomBundle:Default:index.html.twig', array(
         ));
     }
-    
+   
+
+
     /**
-     * Display a form to create or edit a room.
-     * 
+     * Display a form to create or edit a room
+     *
      * @param Request $request
      */
-    public function formAction(Request $request)
+    public function roomFormAction(Request $request)
     {
-        // Manage edition mode
         $room = new Room();
+        // Manage edition mode
         $this->currentRoom = $request->get('room');
         if($this->currentRoom){
             $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
         }
-        
-        $form = $this->createForm("rooms_form", $room);
+        $action = $this->get('router')->generate('submitRoomForm', array('room' => $this->currentRoom));
+
+        $form = $this->createForm("room_form", $room);
+        $form->handleRequest($request);
+
+
+        return $this->render('YdleRoomBundle:Default:form.html.twig', array(
+            'action' => $action,
+//            'form' => $form->createView()
+        ));
+    }
+   
+    public function submitRoomFormAction(Request $request)
+    {
+        $statusCode = 200;
+        $room = new Room();
+        // Manage edition mode
+        $this->currentRoom = $request->get('room');
+        if($this->currentRoom){
+            $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
+        }
+        $action = $this->get('router')->generate('submitRoomForm', array('room' => $this->currentRoom));
+
+        $form = $this->createForm("room_form", $room);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $roomId = $room->getId();
             $em = $this->getDoctrine()->getManager();
             $em->persist($room);
             $em->flush();
-            $message = $this->get('translator')->trans('Pièce ajoutée avec succès');
-            if($roomId){
-                $message = 'Pièce modifié avec succès';
-                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' modified', 'hub');
-            } else {
-                $this->get('ydle.logger')->log('info', 'Room #'.$room->getId().' created', 'hub');
+            $message = $this->get('translator')->trans('room.add.success');
+            if($room->getId()){
+                $message = $this->get('translator')->trans('room.edit.success');
             }
             $this->get('session')->getFlashBag()->add('notice', $message);
-            
-            return $this->redirect($this->generateUrl('rooms'));
+            $this->get('ydle.logger')->log('info', $message, 'hub');
+            $statusCode = 201;
+        } else {
+            $statusCode = 400;
         }
-        
-        return $this->render('YdleRoomBundle:Default:form.html.twig', array(
+
+        $html =  $this->renderView('YdleRoomBundle:Default:form.html.twig', array(
+            'action' => $action,
             'form' => $form->createView()
         ));
+
+        $response = new Response();
+        $response->setContent($html);
+        $response->setStatusCode($statusCode);
+        $response->headers->set('Content-Type', 'text/html');
+        return $response;
     }
-    
+ 
     
     /**
      * Delete a room

@@ -21,5 +21,27 @@
 
 {% block content %}
 <div class="row">
+    <div class="col-md-8">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Rooms</h3>
+                <div class="box-tools pull-right">
+                    <button data-widget="collapse" class="btn btn-primary btn-xs"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="box-body ajax-loading table-responsive" id="rooms-list" data-endpoint="/rooms/list.json" data-template="rooms-list">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box" data-template="rooms-list">
+            <div class="box-header">
+                <h3 class="box-title">Add / Edit a new room</h3>
+            </div>
+
+            <div class="ajax-loading" data-endpoint="/room/form" data-template="room-form" id="room-form">
+            </div>
+        </div>
+    </div> 
 </div>
 {% endblock %}
