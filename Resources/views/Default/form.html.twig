@@ -15,11 +15,7 @@
 
 #}
 
-{% if entry %}
-{% set dataformsource = '/nodes/form/' ~ entry.id %}
-{% else %}
 {% set dataformsource = '' %}
-{% endif %}
 
 {{ form_start(form, { 'action': action, 'attr': {'class': 'ydle-form ajax-form', 'role': 'form', 'data-reload': 'nodes-list', 'data-formsource': dataformsource, 'data-refresh': true, 'novalidate': 'novalidate', 'id': 'node-form' } }) }}
 {{ form_errors(form) }}

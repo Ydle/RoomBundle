@@ -18,63 +18,46 @@
 {% extends "YdleRoomBundle:Default:index.html.twig" %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-lg-8 with-border" style="width: 760px; margin-right: 20px;">
-          
-            <h2>{{ room.name }}</h2>
-            {% if room.nodes|length %}
-            {% for node in room.nodes %}
-            <div class="graph-container">
-                <div id="graphplaceholder-{{ node.id }}" class="graph graphplaceholder" data-nid="{{ node.id }}"></div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Nodes</h3>
+                <div class="box-tools pull-right">
+                    <button data-widget="collapse" class="btn btn-primary btn-xs"><i class="fa fa-minus"></i></button>
+                </div>
             </div>
-            {% endfor %}
-            {% endif %}
-            
+            <div class="box-body ajax-loading table-responsive" id="room-nodes-list" data-endpoint="/room/nodes/list.json?room_id={{ room.id }}" data-template="room-nodes-list">
+            </div>
         </div>
-        <div class="col-lg-4 content panel panel-default">
-          <div class="panel-heading">
-          <h3 class="panel-title">{{ "label.details" | trans }}</h3>
-          </div>
-          <div class="panel-body">
-          {{ "label.name" | trans }} : {{ room.name }}<br />
-          {{ "label.type" | trans }} : {{ room.type.name }}<br />
-          {{ "label.active" | trans }} : {% if room.isactive %}
-          <a href="" class="label label-success">{{ "label.yes" | trans }}</a>
-          {% else %}
-          <a href="" class="label label-primary">{{ "label.no" | trans }}</a>
-          {% endif %}<br />
-          {% if room.description %}
-          {{ "label.description" | trans }} : {{ room.description }} <br />
-          {% endif %}
-          {{ "room.nodes" | trans }} : 
-          {% if room.nodes|length %}
-            {% for node in room.nodes %}
-              {{ node.name }}<br />
-            {% endfor %}
-          {% else %}
-          {{ "room.nosensor" | trans }}
-          {% endif %}
-          </div>
-          <div class="panel-footer">
-          <a href="{{ path('rooms') }}" class="btn btn-default">{{ "action.return" | trans }}</a>
-          </div>
-        </div>
-        {% if data | length %}
-        <div class="col-lg-4 content panel panel-default">
-          <div class="panel-heading">
-          <h3 class="panel-title">{{ "room.data" | trans }}</h3>
-          </div>
-          <div class="panel-body">
-          {% for sensorData in data %}
-            {% set type = sensorData.type.unit %}
-            {% if type == '°' %}
-              {{ sensorData.type.name }} : {{ sensorData.data / 100 }} °C
-            {% elseif type == '%' %}
-              {{ sensorData.type.name }} : {{ sensorData.data / 100 | number_format }} %
-            {% endif %}
-          {% endfor %}
-          </div>
-        </div>
-        {% endif %}
     </div>
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{{ room.name }}</h3>
+            </div>
+
+            <div class="box-body">
+            {{ "label.name" | trans }} : {{ room.name }}<br />
+            {{ "label.type" | trans }} : {{ room.type.name }}<br />
+            {{ "label.active" | trans }} : {% if room.isactive %}
+            <a href="" class="label label-success">{{ "label.yes" | trans }}</a>
+            {% else %}
+            <a href="" class="label label-primary">{{ "label.no" | trans }}</a>
+            {% endif %}<br />
+            {{ "room.nodes" | trans }} : 
+            {% if room.nodes|length %}
+              {% for node in room.nodes %}
+                {{ node.name }}<br />
+              {% endfor %}
+            {% else %}
+            {{ "room.nosensor" | trans }}
+            {% endif %}
+            {% if room.description %}
+            {{ "label.description" | trans }} : {{ room.description }} <br />
+            {% endif %}
+            </div>
+        </div>
+    </div> 
+</div>
 {% endblock %}

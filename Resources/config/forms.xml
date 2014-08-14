@@ -13,7 +13,7 @@
             <tag name="form.type" alias="room_types" />
         </service>
         <service id="ydle.room.form" class="%ydle.room.form.class%">
-            <tag name="form.type" alias="room_form" />
+            <tag name="form.type" alias="rooms_form" />
         </service>
     </services>
 </container>

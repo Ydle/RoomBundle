@@ -54,17 +54,17 @@ class DefaultController extends Controller
         // Manage edition mode
         $this->currentRoom = $request->get('room');
         if($this->currentRoom){
-            $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
+            $room = $this->get("ydle.room.manager")->find($request->get('room'));
         }
         $action = $this->get('router')->generate('submitRoomForm', array('room' => $this->currentRoom));
 
-        $form = $this->createForm("room_form", $room);
+        $form = $this->createForm("rooms_form", $room);
         $form->handleRequest($request);
-
-
-        return $this->render('YdleRoomBundle:Default:form.html.twig', array(
+        
+       
+	return $this->render('YdleRoomBundle:Rooms:form.html.twig', array(
             'action' => $action,
-//            'form' => $form->createView()
+            'form' => $form->createView()
         ));
     }
    
@@ -75,13 +75,13 @@ class DefaultController extends Controller
         // Manage edition mode
         $this->currentRoom = $request->get('room');
         if($this->currentRoom){
-            $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
+            $room = $this->get("ydle.room.manager")->find($request->get('room'));
         }
         $action = $this->get('router')->generate('submitRoomForm', array('room' => $this->currentRoom));
 
-        $form = $this->createForm("room_form", $room);
+        $form = $this->createForm("rooms_form", $room);
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($room);
@@ -97,7 +97,7 @@ class DefaultController extends Controller
             $statusCode = 400;
         }
 
-        $html =  $this->renderView('YdleRoomBundle:Default:form.html.twig', array(
+        $html =  $this->renderView('YdleRoomBundle:Rooms:form.html.twig', array(
             'action' => $action,
             'form' => $form->createView()
         ));
@@ -108,57 +108,17 @@ class DefaultController extends Controller
         $response->headers->set('Content-Type', 'text/html');
         return $response;
     }
- 
     
-    /**
-     * Delete a room
-     * 
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     */
-    public function roomdeleteAction(Request $request)
-    {
-        $roomId = $request->get('room');
-        $object = $this->get("ydle.rooms.manager")->getRepository()->find($roomId);
-        $em = $this->getDoctrine()->getManager();                                                                         
-        $em->remove($object);
-        $em->flush();
-        $this->get('session')->getFlashBag()->add('notice', 'Room removed');
-        $this->get('ydle.logger')->log('info', 'Room #'.$roomId.' deleted', 'hub');
-        return $this->redirect($this->generateUrl('rooms'));
-    }
     
-    /**
-    * Manage activation or de-activation of a room
-    * 
-    * @param Request $request
-    */
-    public function roomactivationAction(Request $request)
+    public function roomDetailAction(Request $request)
     {
-        $isActive = $request->get('active');
-        $message = $isActive?'Room activated':'Room deactivated';
-        $object = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'))->setIsActive($isActive);
-        $em = $this->getDoctrine()->getManager();                                                                         
-        $em->persist($object);
-        $em->flush();
-        $this->get('session')->getFlashBag()->add('notice', $message);
+        $room = $this->get("ydle.room.manager")->findBySlug($request->get('room'));
         
-        if($isActive)  {
-            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' activated', 'hub');
-        } else {
-            $this->get('ydle.logger')->log('info', 'Room #'.$object->getId().' deactivated', 'hub');
-        }
-        return $this->redirect($this->generateUrl('rooms'));
-    }
-    
-    public function detailAction(Request $request)
-    {
-        $room = $this->get("ydle.rooms.manager")->getRepository()->find($request->get('room'));
-        
-        $lastData = $this->get('ydle.data.manager')->getLastData($room->getId());
+        //$lastData = $this->get('ydle.data.manager')->getLastData($room->getId());
         
         return $this->render('YdleRoomBundle:Default:detail.html.twig', array(
             'room' => $room,
-            'data' => $lastData
+            'data' => array()//$lastData
         ));
     }
     

@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 
 class RoomType extends AbstractType
-{
+{    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -44,7 +44,7 @@ class RoomType extends AbstractType
 
     public function getName()
     {
-        return 'rooms_form';
+        return 'room_form';
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -54,3 +54,4 @@ class RoomType extends AbstractType
         ));
     }
 }
+?>

@@ -14,12 +14,14 @@
 #    along with Ydle.  If not, see <http://www.gnu.org/licenses/>.
 
 rooms:
-    pattern:  /rooms
-    defaults: { _controller: YdleRoomBundle:Default:index }
+  pattern:  /rooms
+  defaults: { _controller: YdleRoomBundle:Default:index }
 roomForm:
   pattern: /room/form/{room}
   defaults: { _controller: YdleRoomBundle:Default:roomForm, room:0 }
 submitRoomForm:
   pattern: /room/form/{room}/submit
   defaults: { _controller: YdleRoomBundle:Default:submitRoomForm, room:0 }
-
+roomDetail:
+  pattern: /room/detail/{room}
+  defaults: { _controller: YdleRoomBundle:Default:roomDetail, room:0 }
