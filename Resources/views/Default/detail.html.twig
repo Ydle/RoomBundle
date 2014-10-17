@@ -91,7 +91,16 @@
                         <h3 class="box-title">Current temperature</h3>
                     </div>
                     <div class="box-body">
-                        <span class="glyphicon glyphicon-fire"> 30°C</span>
+                        <span class="glyphicon glyphicon-fire"> {{ data[type.id].data }} {{ data[type.id].unit }}</span>
+                    </div>
+                </div>
+                {% elseif type.unit == "%" %}
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Current humidity</h3>
+                    </div>
+                    <div class="box-body">
+                        <span class="glyphicon glyphicon-fire"> {{ data[type.id].data }} {{ data[type.id].unit }}</span>
                     </div>
                 </div>
                 {% endif %}

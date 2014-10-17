@@ -114,11 +114,25 @@ class DefaultController extends Controller
     {
         $room = $this->get("ydle.room.manager")->findBySlug($request->get('room'));
         
-        //$lastData = $this->get('ydle.data.manager')->getLastData($room->getId());
-        
+        $lastData = $this->get('ydle.data.manager')->getLastData($room->getId());
+	$cleanData = array();
+        foreach($lastData as $data){
+            $unit = $data->getType()->getUnit();
+            $tmpData = array(
+                'unit' => $unit,
+                'data' => $data->getData()
+            );
+            switch($unit){
+                case '%':
+                case '°C':
+                    $tmpData['data'] = round($tmpData['data'] / 100, 1);
+                break;
+            }
+            $cleanData[$data->getType()->getId()] = $tmpData;
+        } 
         return $this->render('YdleRoomBundle:Default:detail.html.twig', array(
             'room' => $room,
-            'data' => array()//$lastData
+            'data' => $cleanData
         ));
     }
     
