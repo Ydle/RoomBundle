@@ -1,7 +1,7 @@
 <?php
 /*
-	Dev : Titz
-	Date : 2014-12-21
+    Dev : Titz
+    Date : 2014-12-21
 */
 
 /*
@@ -30,36 +30,36 @@ use Ydle\NodesBundle\Entity\Node;
 class RoomTypeTest extends \PHPUnit_Framework_TestCase
 {
 
-	public function testSetName()
-	{
-	    $roomType = new RoomType();
+    public function testSetName()
+    {
+        $roomType = new RoomType();
 
-	    $roomType->setName('RoomType Name Test');
-	    $this->assertEquals('RoomType Name Test', $roomType->getName());
-	}
+        $roomType->setName('RoomType Name Test');
+        $this->assertEquals('RoomType Name Test', $roomType->getName());
+    }
 
-	public function testSetDescription()
-	{
-	    $roomType = new RoomType();
+    public function testSetDescription()
+    {
+        $roomType = new RoomType();
 
-	    $roomType->setDescription('Room Type Description Test');
-	    $this->assertEquals('Room Type Description Test', $roomType->getDescription());
-	}
+        $roomType->setDescription('Room Type Description Test');
+        $this->assertEquals('Room Type Description Test', $roomType->getDescription());
+    }
 
-	public function testSetIsActive()
-	{
-	    $roomType = new RoomType();
+    public function testSetIsActive()
+    {
+        $roomType = new RoomType();
 
-	    $roomType->setIsActive(FALSE);
-	    $this->assertEquals(FALSE, $roomType->getIsActive());
-	    $roomType->setIsActive(TRUE);
-	    $this->assertEquals(TRUE, $roomType->getIsActive());
-	}
+        $roomType->setIsActive(FALSE);
+        $this->assertEquals(FALSE, $roomType->getIsActive());
+        $roomType->setIsActive(TRUE);
+        $this->assertEquals(TRUE, $roomType->getIsActive());
+    }
 
     public function testAddRoom()
     {
-    	$room = new Room;
-    	$roomType = new RoomType();
+        $room = new Room;
+        $roomType = new RoomType();
         $arrRooms = new \Doctrine\Common\Collections\ArrayCollection();
         $arrRooms[] = $room;
 
@@ -69,8 +69,8 @@ class RoomTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveRoom()
     {
-    	$room = new Room;
-    	$roomType = new RoomType();
+        $room = new Room;
+        $roomType = new RoomType();
         $arrRooms = new \Doctrine\Common\Collections\ArrayCollection();
         $arrRooms[] = $room;
 
@@ -80,46 +80,46 @@ class RoomTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($roomType->getRooms()));
     }
 
-	public function testSetCreatedAt()
-	{
-	    $roomType = new RoomType();
-	    $date = new \DateTime('2014-12-12');
+    public function testSetCreatedAt()
+    {
+        $roomType = new RoomType();
+        $date = new \DateTime('2014-12-12');
 
-	    $roomType->setCreatedAt($date);
-	    $this->assertEquals($date, $roomType->getCreatedAt());
-	}
+        $roomType->setCreatedAt($date);
+        $this->assertEquals($date, $roomType->getCreatedAt());
+    }
 
-   	public function testSetUpdatedAt()
-	{
-	    $roomType = new RoomType();
-	    $date = new \DateTime('2014-12-12');
+    public function testSetUpdatedAt()
+    {
+        $roomType = new RoomType();
+        $date = new \DateTime('2014-12-12');
 
-	    $roomType->setUpdatedAt($date);
-	    $this->assertEquals($date, $roomType->getUpdatedAt());
-	}
+        $roomType->setUpdatedAt($date);
+        $this->assertEquals($date, $roomType->getUpdatedAt());
+    }
 
     public function testCountRooms()
     {
-    	$room = new Room;
-    	$roomType = new RoomType();
+        $room = new Room;
+        $roomType = new RoomType();
         $arrRooms = new \Doctrine\Common\Collections\ArrayCollection();
         $arrRooms[] = $room;
 
         $roomType->addRoom($room);
 
         $this->assertEquals(1, count($roomType->countRooms()));
-    }	
+    }
 
-	public function testToArray(){
-    	$room = new Room;
+    public function testToArray(){
+        $room = new Room;
 
-		$roomType = new RoomType();
-		$roomType->setName('roomType name');
-		$roomType->setDescription('roomType description');
-		$roomType->setIsActive(TRUE);
-		$roomType->addRoom($room);
+        $roomType = new RoomType();
+        $roomType->setName('roomType name');
+        $roomType->setDescription('roomType description');
+        $roomType->setIsActive(TRUE);
+        $roomType->addRoom($room);
 
-		$roomTypeComparative = array(
+        $roomTypeComparative = array(
             'id' => $roomType->getId(),
             'name' => 'roomType name',
             'description' => 'roomType description',
@@ -128,16 +128,11 @@ class RoomTypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals($roomTypeComparative,$roomType->toArray());
-	}  
+    }
 
-	public function testSetTranslatableLocale() {
+    // TODO
+    public function testSetTranslatableLocale() {
 
-	}  
-
-	// TODO
-    public function setTranslatableLocale($locale)
-    {
-        
     }
 
 }

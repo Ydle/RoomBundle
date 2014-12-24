@@ -1,7 +1,7 @@
 <?php
 /*
-	Dev : Titz
-	Date : 2014-12-18
+    Dev : Titz
+    Date : 2014-12-18
 */
 
 /*
@@ -30,61 +30,60 @@ use Ydle\NodesBundle\Entity\Node;
 class RoomTest extends \PHPUnit_Framework_TestCase
 {
 
-	public function testSetName()
-	{
-	    $room = new Room();
+    public function testSetName()
+    {
+        $room = new Room();
 
-	    $room->setName('Room Name Test');
-	    $this->assertEquals('Room Name Test', $room->getName());
-	}
+        $room->setName('Room Name Test');
+        $this->assertEquals('Room Name Test', $room->getName());
+    }
 
-	public function testSetDescription()
-	{
-	    $room = new Room();
+    public function testSetDescription()
+    {
+        $room = new Room();
 
-	    $room->setDescription('Room Description Test');
-	    $this->assertEquals('Room Description Test', $room->getDescription());
-	}
+        $room->setDescription('Room Description Test');
+        $this->assertEquals('Room Description Test', $room->getDescription());
+    }
 
-	public function testSetIsActive()
-	{
-	    $room = new Room();
+    public function testSetIsActive()
+    {
+        $room = new Room();
 
-	    $room->setIsActive(FALSE);
-	    $this->assertEquals(FALSE, $room->getIsActive());
-	    $room->setIsActive(TRUE);
-	    $this->assertEquals(TRUE, $room->getIsActive());
-	}
+        $room->setIsActive(FALSE);
+        $this->assertEquals(FALSE, $room->getIsActive());
+        $room->setIsActive(TRUE);
+        $this->assertEquals(TRUE, $room->getIsActive());
+    }
 
-	// Voir comment on créer un RoomType
-	public function testSetType()
-	{
-	    $room = new Room();
+    public function testSetType()
+    {
+        $room = new Room();
 
-	    $typeLivingRoom = new RoomType();
+        $typeLivingRoom = new RoomType();
         $typeLivingRoom->setName('Living room');
         $typeLivingRoom->setIsActive(true);
-	    $room->setType($typeLivingRoom);
-	    $this->assertEquals($typeLivingRoom, $room->getType());
-	}
+        $room->setType($typeLivingRoom);
+        $this->assertEquals($typeLivingRoom, $room->getType());
+    }
 
-	public function testSetCreatedAt()
-	{
-	    $room = new Room();
-	    $date = new \DateTime('2014-12-12');
+    public function testSetCreatedAt()
+    {
+        $room = new Room();
+        $date = new \DateTime('2014-12-12');
 
-	    $room->setCreatedAt($date);
-	    $this->assertEquals($date, $room->getCreatedAt());
-	}
+        $room->setCreatedAt($date);
+        $this->assertEquals($date, $room->getCreatedAt());
+    }
 
-   	public function testSetUpdatedAt()
-	{
-	    $room = new Room();
-	    $date = new \DateTime('2014-12-12');
+    public function testSetUpdatedAt()
+    {
+        $room = new Room();
+        $date = new \DateTime('2014-12-12');
 
-	    $room->setUpdatedAt($date);
-	    $this->assertEquals($date, $room->getUpdatedAt());
-	}
+        $room->setUpdatedAt($date);
+        $this->assertEquals($date, $room->getUpdatedAt());
+    }
 
     public function testAddNode()
     {
